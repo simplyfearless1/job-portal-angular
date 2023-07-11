@@ -1,0 +1,38 @@
+.job-skill-form-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    button {
+        height: 56px;
+        min-width: 120px;
+        margin-left: 16px;
+    }
+}
+
+.edit-job-form-skills-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @media(min-width: 1024px) {
+        flex-direction: row;
+    }
+    flex-wrap: wrap;
+    .mat-mdc-list-item, .mat-mdc-list-option {
+        max-width: max-content;
+    }
+}
+.mat-mdc-form-field {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.edit-job-ad-form-submit-container {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    button {
+        height: 48px;
+    }
+}

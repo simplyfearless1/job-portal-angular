@@ -1,0 +1,65 @@
+<form [formGroup]="jobForm" (ngSubmit)="saveJob()">
+  <mat-form-field>
+    <mat-label>Job Title</mat-label>
+    <input matInput formControlName="title">
+    <mat-error *ngIf="jobForm.get('title')?.hasError('required')">
+      Job Title is required
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Job Description</mat-label>
+    <textarea matInput placeholder="Job Description" formControlName="description"></textarea>
+    <mat-error *ngIf="jobForm.get('description')?.hasError('required')">
+      Job Description is required
+    </mat-error>
+    <mat-error *ngIf="jobForm.get('description')?.hasError('minlength')">
+      Job Description must have at least ten characters
+    </mat-error>
+  </mat-form-field>
+  <form [formGroup]="jobSkillForm" class="job-skill-form-container" (ngSubmit)="addSkill()">
+    <mat-form-field>
+      <mat-label>Add Job skill</mat-label>
+      <input matInput placeholder="Skill" formControlName="jobSkill">
+      <mat-error *ngIf="jobSkillForm.get('jobSkill')?.hasError('required')">
+        Skill is required
+      </mat-error>
+      <mat-error *ngIf="jobSkillForm.get('jobSkill')?.hasError('incorrect')">
+        Skill with that value already exists
+      </mat-error>
+    </mat-form-field>
+    <button mat-stroked-button type="submit">Add Skill</button>
+  </form>
+  <ng-container *ngIf="jobSkills.length > 0">
+    <h3>
+      Added Job skills
+    </h3>
+    <mat-list role="list" class="create-job-form-skills-container">
+      <ng-container *ngFor="let skill of jobSkills">
+        <mat-list-item role="listitem">
+          {{skill}}
+        </mat-list-item>
+        <button mat-icon-button color="primary" type="button" (click)="removeSkill(skill)" aria-label="Remove skill">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ng-container>
+    </mat-list>
+    <input type="hidden" formControlName="skills">
+  </ng-container>
+  <mat-form-field>
+    <mat-label>Select Job Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option *ngFor="let status of jobStatusList" [value]="status | lowercase">{{status}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="jobForm.get('status')?.hasError('required')">
+      Job Status is required
+    </mat-error>
+  </mat-form-field>
+  <div class="create-job-ad-form-submit-container">
+    <button mat-raised-button type="button" routerLink="/job-ads">
+      Discard
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      Publish
+    </button>
+  </div>
+</form>

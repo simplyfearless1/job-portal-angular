@@ -1,0 +1,30 @@
+<div class="view-job-ads-filters-container">
+    <form class="view-job-ads-filer-search-container" [formGroup]="searchForm" (ngSubmit)="filterJobs()">
+        <mat-form-field>
+            <mat-label>
+                Search Job Ads
+            </mat-label>
+            <input matInput type="search" formControlName="search" placeholder="Search by title" value="filtersToAssign.q" (keyup)="searchFieldChanged()">
+            <mat-error *ngIf="searchForm.get('search')?.hasError('required')">
+                Serach can't be empty
+            </mat-error>
+            <button mat-icon-button class="clear-search-field" aria-label="Clear Search field" (click)="clearSearchField()" *ngIf="showClearButton === true">
+                <mat-icon>
+                    close
+                </mat-icon>
+            </button>
+        </mat-form-field>
+        <button mat-fab extended color="primary" aria-label="Job Ads Search button" type="submit">
+            <mat-icon>search</mat-icon>
+            Search
+        </button>      
+    </form>
+    <mat-form-field>
+        <mat-label>
+            Filter by Status
+        </mat-label>
+        <mat-select multiple [(value)]="jobStatus" (selectionChange)="filterJobs()">
+            <mat-option *ngFor="let jobStatus of  jobStatusList" [value]="jobStatus | lowercase">{{jobStatus}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

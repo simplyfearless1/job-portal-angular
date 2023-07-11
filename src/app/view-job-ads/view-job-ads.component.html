@@ -1,0 +1,7 @@
+<div class="view-job-ads-container">
+    <h1>
+        View Job Ads
+    </h1>
+    <app-view-job-ads-filters [filtersToAssign]="filtersToAssign" (filteredJobAds)="filterJobAds($event)"/>
+    <app-view-job-ads-cards [jobAds]="jobAds" [pageToAssign]="pageToAssign" />
+</div>

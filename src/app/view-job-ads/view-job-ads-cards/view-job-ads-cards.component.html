@@ -1,0 +1,46 @@
+<div class="view-job-ads-cards-container">
+  <ng-container *ngIf="jobAds !== undefined && jobAds.length > 0; else errorVisible">
+    <mat-grid-list [cols]="mybreakpoint" rowHeight="220px" [gutterSize]="'16px'" (window:resize)="handleSize($event)">
+      <mat-grid-tile *ngFor="let job of jobAds | paginate: { itemsPerPage: 9, currentPage: page}">
+        <mat-card class="job-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{job.title}}
+            </mat-card-title>
+            <mat-card-subtitle>
+              <mat-chip-listbox>
+                <mat-chip [disableRipple] *ngFor="let skill of job.skills">
+                  {{skill}}
+                </mat-chip>
+              </mat-chip-listbox>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              {{job.description | truncate:30}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-icon-button color="primary" aria-label="Edit Job icon" (click)="editJob(job.id)">
+              <mat-icon>edit_square</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" aria-label="Publish Job Icon" (click)="publishJob(job.id)"
+              *ngIf="job.status == 'draft'">
+              <mat-icon>publish</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" aria-label="Archive Job Icon" (click)="archiveJob(job.id)"
+              *ngIf="job.status == 'published'">
+              <mat-icon>archive</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <pagination-controls class="job-ads-cards-pagination-container" (pageChange)="getPage($event)"></pagination-controls>
+  </ng-container>
+  <ng-template #errorVisible>
+    <h2 class="jobs-ads-error">
+      No Jobs found please try again
+    </h2>
+  </ng-template>
+</div>
