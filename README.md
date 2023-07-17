@@ -1,5 +1,7 @@
 # JobPortal
 
+A simple Job Ads portal with the ability to create, edit, view and filter+search Job positions, a proof of concept project.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
 
 ## Project Setup
